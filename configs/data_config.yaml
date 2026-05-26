@@ -1,0 +1,82 @@
+# Data Configuration for LogisChain AI
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  features_dir: "data/features"
+
+simulation:
+  random_seed: 42
+  num_suppliers: 15
+  num_manufacturers: 5
+  num_logistics_providers: 3
+  num_ports: 8
+  num_customers: 10
+  num_vessels: 50
+  num_days: 365
+
+ports:
+  - name: "Shanghai"
+    code: "CNSHA"
+    coordinates: [31.2304, 121.4737]
+    base_congestion: 1.8
+  - name: "Rotterdam"
+    code: "NLRTM"
+    coordinates: [51.9244, 4.4777]
+    base_congestion: 1.5
+  - name: "Singapore"
+    code: "SGSIN"
+    coordinates: [1.3521, 103.8198]
+    base_congestion: 1.2
+  - name: "Los Angeles"
+    code: "USLAX"
+    coordinates: [34.0522, -118.2437]
+    base_congestion: 2.2
+  - name: "Manzanillo"
+    code: "MXZLO"
+    coordinates: [19.0522, -104.3158]
+    base_congestion: 1.6
+  - name: "Hamburg"
+    code: "DEHAM"
+    coordinates: [53.5511, 9.9937]
+    base_congestion: 1.4
+  - name: "Mumbai JNPT"
+    code: "INBOM"
+    coordinates: [18.9502, 72.9505]
+    base_congestion: 1.9
+  - name: "Felixstowe"
+    code: "GBFXT"
+    coordinates: [51.9631, 1.3512]
+    base_congestion: 1.3
+
+modalities:
+  - name: "Ocean"
+    base_cost_per_km: 0.05
+    reliability: 0.88
+  - name: "Air"
+    base_cost_per_km: 0.80
+    reliability: 0.98
+  - name: "Rail"
+    base_cost_per_km: 0.15
+    reliability: 0.92
+  - name: "Road"
+    base_cost_per_km: 0.25
+    reliability: 0.90
+
+commodities:
+  - code: "8528.72"
+    name: "Consumer Electronics (TVs/Monitors)"
+    risk_category: "Medium"
+    base_value: 2400000
+  - code: "8708.29"
+    name: "Automotive Components"
+    risk_category: "High"
+    base_value: 1800000
+  - code: "3004.90"
+    name: "Pharmaceuticals (APIs)"
+    risk_category: "High"
+    base_value: 3500000
+  - code: "7210.49"
+    name: "Steel Sheets (Cold Chain/Ind)"
+    risk_category: "Low"
+    base_value: 800000

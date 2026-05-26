@@ -1,0 +1,52 @@
+# Model Hyperparameters for LogisChain AI
+
+gnn:
+  model_type: "HetGAT"
+  in_channels: 21           # 21-dimensional input feature vector per node
+  hidden_channels: 64
+  out_channels: 128         # Output embedding size
+  num_layers: 3             # Mandatory 3-layer message-passing
+  heads: 4                  # Number of attention heads
+  dropout: 0.1
+  learning_rate: 0.001
+  epochs: 50
+
+tcn:
+  model_type: "TCNModel"
+  input_chunk_length: 128   # 128 days input memory window
+  output_chunk_length: 30   # 30-day forecast horizon (multi-horizon is 30/60/90)
+  kernel_size: 3
+  num_filters: 64
+  dilation_base: 2          # Dilations: [1, 2, 4, 8, 16, 32, 64] -> Receptive field = 128 days
+  dropout: 0.2
+  learning_rate: 0.001
+  epochs: 100
+  quantiles: [0.1, 0.5, 0.9] # For quantile regression (10th, 50th, 90th percentiles)
+
+transformer:
+  model_type: "ShipmentRiskTransformer"
+  num_heads: 4              # 4+ heads mandatory
+  num_layers: 3
+  d_model: 64
+  dim_feedforward: 128
+  dropout: 0.1
+  learning_rate: 0.0005
+  epochs: 40
+
+xgboost:
+  n_estimators: 800         # Optuna optimized value
+  max_depth: 6
+  learning_rate: 0.02
+  min_child_weight: 25
+  subsample: 0.8
+  colsample_bytree: 0.7
+  gamma: 0.1
+  reg_alpha: 0.1
+  reg_lambda: 1.0
+  scale_pos_weight: 32.3    # Adjusts for ~3% default rate imbalance
+
+ensemble:
+  meta_learner: "LightGBM"
+  num_folds: 5              # 5-fold cross-validation
+  learning_rate: 0.05
+  n_estimators: 200
